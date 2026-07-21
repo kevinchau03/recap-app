@@ -44,7 +44,7 @@ const moments = [
 
 export default function Home() {
   return (
-    <main>
+    <main className={styles.landing}>
       <header className={styles.siteHeader}>
         <a href="#" className={styles.logo} aria-label="Home">
           <span className={styles.logoMark}>D</span>
@@ -57,7 +57,7 @@ export default function Home() {
           <a href="#about">About</a>
         </nav>
 
-        <a href="/trips" className={styles.navButton}>
+        <a href="/home" className={styles.navButton}>
           Open app
         </a>
       </header>

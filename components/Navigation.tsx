@@ -1,20 +1,33 @@
-import { CircleUserRound, House, Plus } from "lucide-react";
+"use client";
+
+import Link from "next/link";
+import { House, Luggage, Settings } from "lucide-react";
+import { usePathname } from "next/navigation";
 import styles from "./Navigation.module.css";
 
 export default function Navigation() {
+  const pathname = usePathname();
+
+  const itemClassName = (href: string) =>
+    `${styles.item} ${pathname === href ? styles.active : ""}`;
+
   return (
     <nav className={styles.navigation} aria-label="App navigation">
-      <a className={styles.item} href="/trips" aria-label="Home">
+      <Link className={itemClassName("/home")} href="/home" aria-label="Home">
         <House aria-hidden="true" size={25} strokeWidth={2.4} />
-      </a>
+      </Link>
 
-      <button className={styles.createButton} type="button" aria-label="Add">
-        <Plus aria-hidden="true" size={31} strokeWidth={2.8} />
-      </button>
+      <Link className={itemClassName("/trips")} href="/trips" aria-label="Trips">
+        <Luggage aria-hidden="true" size={25} strokeWidth={2.4} />
+      </Link>
 
-      <a className={styles.item} href="#" aria-label="Profile">
-        <CircleUserRound aria-hidden="true" size={25} strokeWidth={2.4} />
-      </a>
+      <Link
+        className={itemClassName("/settings")}
+        href="/settings"
+        aria-label="Settings"
+      >
+        <Settings aria-hidden="true" size={25} strokeWidth={2.4} />
+      </Link>
     </nav>
   );
 }

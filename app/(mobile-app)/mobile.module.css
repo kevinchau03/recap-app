@@ -1,0 +1,402 @@
+.mobileRoute {
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background:
+    radial-gradient(circle at 20% 12%, rgba(0, 0, 0, 0.05), transparent 16rem),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.035) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.025) 1px, transparent 1px),
+    #f7f4ea;
+  background-size: auto, 22px 22px, 22px 22px, auto;
+}
+
+.mobileShell {
+  width: min(100%, 430px);
+  min-height: min(880px, calc(100svh - 48px));
+  position: relative;
+  overflow: clip;
+  display: flex;
+  flex-direction: column;
+  padding: 24px 18px 118px;
+  border: 2px solid #111;
+  border-radius: 30px 24px 34px 22px;
+  background:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.03) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.024) 1px, transparent 1px),
+    #fffef8;
+  background-size: 18px 18px, 18px 18px, auto;
+  box-shadow: 8px 9px 0 #111, 0 28px 80px rgba(0, 0, 0, 0.13);
+  transform: rotate(0.25deg);
+}
+
+.mobileHeader,
+.pageHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.mobileHeader p,
+.mobileHeader h1,
+.pageHeader p,
+.pageHeader h1,
+.mobileHero p,
+.mobileHero h2,
+.tripRow h3,
+.tripRow p,
+.mobileSectionHeading h2,
+.profileCard h2,
+.profileCard p,
+.tripCardCopy p,
+.tripCardCopy h2 {
+  margin: 0;
+}
+
+.mobileHeader p,
+.pageHeader p {
+  color: #555;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.mobileHeader h1,
+.pageHeader h1 {
+  margin-top: 4px;
+  font-family: Georgia, serif;
+  font-size: 2rem;
+  font-weight: 500;
+  letter-spacing: -0.04em;
+}
+
+.avatarButton,
+.smallAction {
+  flex: 0 0 auto;
+  border: 2px solid #111;
+  background: #fff;
+  color: #111;
+  box-shadow: 2px 3px 0 #111;
+  font-weight: 800;
+}
+
+.avatarButton {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border-radius: 15px 12px 16px 13px;
+}
+
+.smallAction {
+  padding: 10px 12px;
+  border-radius: 13px 11px 14px 10px;
+  font-size: 0.8rem;
+}
+
+.mobileHero {
+  min-height: 190px;
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 20px;
+  border: 2px solid #111;
+  border-radius: 24px 18px 28px 20px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.18) 25%, transparent 25%), #111;
+  background-size: 18px 18px;
+  color: #fff;
+  box-shadow: 4px 5px 0 #555;
+  transform: rotate(-0.7deg);
+}
+
+.mobileHero p { font-size: 0.78rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.78; }
+.mobileHero h2 { margin-top: 8px; font-family: Georgia, serif; font-size: 2rem; font-weight: 500; letter-spacing: -0.04em; }
+.mobileHero span { margin-top: 8px; color: rgba(255, 255, 255, 0.76); font-size: 0.9rem; }
+
+.quickActions { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 18px; }
+.quickActions a,
+.quickActions button { min-height: 52px; display: grid; place-items: center; border: 2px solid #111; border-radius: 16px 13px 18px 12px; background: #fff; color: #111; box-shadow: 3px 4px 0 #111; font-weight: 800; }
+.quickActions a { background: #111; color: #fff; box-shadow: 3px 4px 0 #777; }
+
+.tripList { margin-top: 28px; }
+.mobileSectionHeading { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 14px; }
+.mobileSectionHeading h2 { font-size: 1rem; }
+.mobileSectionHeading a { font-size: 0.86rem; font-weight: 800; text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px; }
+.tripRow { display: grid; grid-template-columns: 64px 1fr; align-items: center; gap: 14px; padding: 12px 0; }
+.tripThumbnail { width: 64px; height: 64px; display: grid; place-items: center; border: 2px solid #111; border-radius: 17px 13px 19px 12px; background: #fff; box-shadow: 2px 3px 0 #111; font-size: 0.72rem; font-weight: 900; }
+.tripRow h3 { font-size: 0.98rem; }
+.tripRow p { margin-top: 5px; color: #555; font-size: 0.84rem; }
+
+.fullTripList { display: grid; gap: 16px; margin-top: 26px; }
+.tripCard { overflow: hidden; display: grid; grid-template-columns: 112px 1fr; min-height: 124px; border: 2px solid #111; border-radius: 20px 16px 22px 15px; background: #fff; box-shadow: 4px 5px 0 #111; }
+.tripCard:nth-child(even) { transform: rotate(-0.45deg); }
+.tripCardArt { display: grid; place-items: center; border-right: 2px solid #111; background: #111; color: #fff; font-size: 0.78rem; font-weight: 900; text-transform: uppercase; }
+.tripCardCopy { display: flex; flex-direction: column; justify-content: center; padding: 16px; }
+.tripCardCopy p { color: #666; font-size: 0.7rem; font-weight: 800; text-transform: uppercase; }
+.tripCardCopy h2 { margin-top: 7px; font-family: Georgia, serif; font-size: 1.3rem; font-weight: 500; }
+.tripCardCopy span { margin-top: 8px; color: #555; font-size: 0.78rem; }
+
+.formCard { display: grid; gap: 18px; margin-top: 28px; padding: 20px; border: 2px solid #111; border-radius: 22px 17px 24px 16px; background: #fff; box-shadow: 5px 6px 0 #111; }
+.formCard label { display: grid; gap: 8px; font-size: 0.8rem; font-weight: 850; }
+.formCard input { width: 100%; min-width: 0; padding: 13px 12px; border: 2px solid #111; border-radius: 12px 10px 13px 9px; background: #fffef8; }
+.fieldGrid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.formCard button { min-height: 50px; border: 2px solid #111; border-radius: 14px 11px 16px 10px; background: #111; color: #fff; box-shadow: 3px 4px 0 #777; font-weight: 850; }
+.cancelLink { justify-self: center; font-size: 0.82rem; font-weight: 800; text-decoration: underline; text-underline-offset: 4px; }
+
+.profileCard { display: flex; align-items: center; gap: 16px; margin-top: 28px; padding: 18px; border: 2px solid #111; border-radius: 20px 16px 22px 15px; background: #111; color: #fff; box-shadow: 4px 5px 0 #777; }
+.largeAvatar { width: 56px; height: 56px; display: grid; place-items: center; border: 2px solid #fff; border-radius: 18px 15px 20px 14px; font-size: 1.15rem; font-weight: 900; }
+.profileCard h2 { font-family: Georgia, serif; font-size: 1.35rem; font-weight: 500; }
+.profileCard p { margin-top: 5px; color: #ccc; font-size: 0.8rem; }
+.settingsList { display: grid; margin-top: 24px; border-block: 2px solid #111; }
+.settingsList button { display: flex; justify-content: space-between; padding: 17px 4px; border: 0; border-bottom: 1px solid #bbb; background: transparent; color: #111; font-weight: 800; text-align: left; }
+.settingsList button:last-child { border-bottom: 0; }
+
+.creationRoute {
+  min-height: 100svh;
+  background:
+    radial-gradient(circle at 12% 8%, rgba(17, 17, 17, 0.055), transparent 22rem),
+    linear-gradient(90deg, rgba(17, 17, 17, 0.035) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(17, 17, 17, 0.03) 1px, transparent 1px),
+    #f7f4ea;
+  background-size: auto, 22px 22px, 22px 22px, auto;
+}
+
+.creationShell {
+  width: 100%;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  padding: max(24px, env(safe-area-inset-top)) max(28px, env(safe-area-inset-right)) max(28px, env(safe-area-inset-bottom)) max(28px, env(safe-area-inset-left));
+}
+
+.creationHeader {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.exitButton {
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  border: 2px solid #111;
+  border-radius: 16px 12px 18px 11px;
+  background: #fff;
+  color: #111;
+  box-shadow: 3px 4px 0 #111;
+  transition: transform 150ms ease, box-shadow 150ms ease;
+}
+
+.exitButton:hover {
+  transform: translate(-1px, -2px) rotate(1deg);
+  box-shadow: 5px 6px 0 #111;
+}
+
+.creationProgress {
+  width: min(100%, 680px);
+  margin: 20px auto 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  position: relative;
+}
+
+.creationProgress::before {
+  content: "";
+  height: 2px;
+  position: absolute;
+  top: 17px;
+  right: 16.66%;
+  left: 16.66%;
+  background: #aaa;
+}
+
+.progressStep {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  justify-items: center;
+  gap: 8px;
+  color: #777;
+}
+
+.progressStep span {
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  border: 2px solid #777;
+  border-radius: 50%;
+  background: #f7f4ea;
+  font-size: 0.78rem;
+  font-weight: 900;
+}
+
+.progressStep p {
+  margin: 0;
+  font-size: 0.72rem;
+  font-weight: 850;
+}
+
+.progressStepActive {
+  color: #111;
+}
+
+.progressStepActive span {
+  border-color: #111;
+  background: #111;
+  color: #fff;
+  box-shadow: 2px 3px 0 #777;
+}
+
+.creationForm {
+  width: min(100%, 680px);
+  flex: 1;
+  margin: 32px auto 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.stepCount {
+  width: fit-content;
+  padding: 7px 10px;
+  border: 2px solid #111;
+  border-radius: 11px 8px 12px 7px;
+  background: #fff;
+  box-shadow: 2px 3px 0 #111;
+  font-size: 0.68rem;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transform: rotate(-0.7deg);
+}
+
+.creationStep {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 48px;
+  padding: 32px 0 46px;
+}
+
+.creationEyebrow {
+  margin: 0 0 13px;
+  color: #555;
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.creationStep h1 {
+  max-width: 620px;
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(3rem, 7vw, 5.4rem);
+  font-weight: 500;
+  line-height: 0.98;
+  letter-spacing: -0.055em;
+}
+
+.creationDescription {
+  max-width: 520px;
+  margin: 18px 0 0;
+  color: #555;
+  font-size: 1rem;
+  line-height: 1.65;
+}
+
+.creationStep label {
+  display: grid;
+  gap: 10px;
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.creationStep input {
+  width: 100%;
+  min-width: 0;
+  padding: 18px 20px;
+  border: 2px solid #111;
+  border-radius: 18px 13px 20px 12px;
+  outline: none;
+  background: #fffef8;
+  color: #111;
+  box-shadow: 5px 6px 0 #111;
+  font-size: 1rem;
+  text-transform: none;
+  transition: transform 150ms ease, box-shadow 150ms ease;
+}
+
+.creationStep input:focus {
+  transform: translate(-1px, -2px);
+  box-shadow: 7px 8px 0 #111;
+}
+
+.dateFields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+.creationActions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding-top: 22px;
+  border-top: 2px solid #111;
+}
+
+.backButton,
+.continueButton {
+  min-height: 54px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 0 20px;
+  border: 2px solid #111;
+  font-weight: 900;
+}
+
+.backButton {
+  border-radius: 15px 11px 17px 10px;
+  background: #fff;
+  color: #111;
+  box-shadow: 3px 4px 0 #111;
+}
+
+.continueButton {
+  min-width: 154px;
+  border-radius: 16px 12px 18px 11px;
+  background: #111;
+  color: #fff;
+  box-shadow: 4px 5px 0 #777;
+}
+
+.continueButton:disabled {
+  border-color: #888;
+  background: #aaa;
+  box-shadow: 3px 4px 0 #ccc;
+  cursor: not-allowed;
+}
+
+@media (max-width: 600px) {
+  .mobileRoute { padding: 0; }
+  .mobileShell { min-height: 100svh; border: 0; border-radius: 0; box-shadow: none; transform: none; }
+  .creationShell { padding: max(18px, env(safe-area-inset-top)) 20px max(22px, env(safe-area-inset-bottom)); }
+  .creationProgress { margin-top: 14px; }
+  .progressStep p { font-size: 0.65rem; }
+  .creationForm { margin-top: 26px; }
+  .creationStep { justify-content: flex-start; gap: 38px; padding-top: 42px; }
+  .creationStep h1 { font-size: clamp(2.7rem, 13vw, 4rem); }
+  .dateFields { grid-template-columns: 1fr; }
+  .creationActions { position: sticky; bottom: 0; padding-bottom: max(2px, env(safe-area-inset-bottom)); background: #f7f4ea; }
+  .continueButton { margin-left: auto; }
+}

@@ -6,7 +6,7 @@
   bottom: max(14px, env(safe-area-inset-bottom));
   z-index: 20;
   display: grid;
-  grid-template-columns: 1fr 76px 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   align-items: center;
   gap: 10px;
   padding: 9px;
@@ -23,15 +23,6 @@
   transform: translateX(50%) rotate(-0.5deg);
 }
 
-.item,
-.createButton {
-  min-width: 0;
-  border: 2px solid #111;
-  color: #111;
-  font-weight: 900;
-  line-height: 1;
-}
-
 .item {
   height: 52px;
   display: grid;
@@ -41,23 +32,16 @@
   box-shadow: 2px 3px 0 #111;
 }
 
+.item.active {
+  background: #111;
+  color: #fff;
+  box-shadow: 2px 3px 0 #777;
+}
+
 .item:first-child {
   transform: rotate(0.8deg);
 }
 
 .item:last-child {
   transform: rotate(-0.8deg);
-}
-
-.createButton {
-  width: 64px;
-  height: 64px;
-  display: grid;
-  place-items: center;
-  justify-self: center;
-  border-radius: 50%;
-  background: #111;
-  color: #fff;
-  box-shadow: 3px 4px 0 #6f6f6f;
-  transform: translateY(-12px);
 }
