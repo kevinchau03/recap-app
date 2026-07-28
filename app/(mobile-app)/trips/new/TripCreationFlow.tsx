@@ -2,19 +2,20 @@
 
 import Link from "next/link";
 import { ArrowLeft, ArrowRight, Check, X } from "lucide-react";
-import { useRouter } from "next/navigation";
-import { FormEvent, useState } from "react";
+import { FormEvent, useState, useTransition } from "react";
+import { createTrip } from "./actions";
 import styles from "../../mobile.module.css";
 
 const steps = ["Name", "Dates", "Destination"];
 
 export default function TripCreationFlow() {
-  const router = useRouter();
   const [step, setStep] = useState(0);
   const [tripName, setTripName] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [destination, setDestination] = useState("");
+  const [error, setError] = useState("");
+  const [isPending, startTransition] = useTransition();
 
   const canContinue =
     (step === 0 && tripName.trim().length > 0) ||
@@ -23,6 +24,7 @@ export default function TripCreationFlow() {
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    setError("");
 
     if (!canContinue) return;
 
@@ -31,7 +33,19 @@ export default function TripCreationFlow() {
       return;
     }
 
-    router.push("/trips");
+    const formData = new FormData();
+    formData.set("tripName", tripName);
+    formData.set("startDate", startDate);
+    formData.set("endDate", endDate);
+    formData.set("destination", destination);
+
+    startTransition(async () => {
+      const result = await createTrip(formData);
+
+      if (result?.error) {
+        setError(result.error);
+      }
+    });
   }
 
   return (
@@ -56,6 +70,8 @@ export default function TripCreationFlow() {
 
       <form className={styles.creationForm} onSubmit={handleSubmit}>
         <div className={styles.stepCount}>Step {step + 1} of {steps.length}</div>
+
+        {error ? <p className={styles.formError}>{error}</p> : null}
 
         {step === 0 && (
           <div className={styles.creationStep}>
@@ -143,8 +159,8 @@ export default function TripCreationFlow() {
             </button>
           ) : <span />}
 
-          <button className={styles.continueButton} disabled={!canContinue} type="submit">
-            {step === steps.length - 1 ? "Create trip" : "Continue"}
+          <button className={styles.continueButton} disabled={!canContinue || isPending} type="submit">
+            {step === steps.length - 1 ? (isPending ? "Creating..." : "Create trip") : "Continue"}
             {step === steps.length - 1
               ? <Check aria-hidden="true" size={20} />
               : <ArrowRight aria-hidden="true" size={20} />}

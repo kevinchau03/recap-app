@@ -1,0 +1,122 @@
+.authPage {
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background:
+    radial-gradient(circle at 12% 10%, rgba(49, 95, 70, 0.14), transparent 22rem),
+    linear-gradient(90deg, rgba(23, 35, 28, 0.035) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(23, 35, 28, 0.03) 1px, transparent 1px),
+    #f7f4ea;
+  background-size: auto, 22px 22px, 22px 22px, auto;
+}
+
+.authCard {
+  width: min(100%, 430px);
+  display: grid;
+  gap: 22px;
+  padding: 28px 22px;
+  border: 2px solid #111;
+  border-radius: 26px 20px 29px 18px;
+  background: #fffef8;
+  box-shadow: 7px 8px 0 #111, 0 24px 70px rgba(0, 0, 0, 0.12);
+}
+
+.authHeader {
+  display: grid;
+  gap: 8px;
+}
+
+.authHeader h1,
+.authHeader p,
+.authFooter {
+  margin: 0;
+}
+
+.authHeader h1 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 2.35rem;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.authHeader p,
+.authFooter {
+  color: #555;
+  font-size: 0.94rem;
+}
+
+.authForm {
+  display: grid;
+  gap: 15px;
+}
+
+.authForm label {
+  display: grid;
+  gap: 7px;
+  color: #111;
+  font-size: 0.78rem;
+  font-weight: 850;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.authForm input {
+  width: 100%;
+  min-width: 0;
+  padding: 13px 12px;
+  border: 2px solid #111;
+  border-radius: 13px 10px 15px 9px;
+  outline: none;
+  background: #fff;
+  color: #111;
+  box-shadow: 2px 3px 0 #111;
+}
+
+.authForm input:focus {
+  box-shadow: 4px 5px 0 #111;
+  transform: translate(-1px, -1px);
+}
+
+.authForm button {
+  min-height: 52px;
+  margin-top: 4px;
+  border: 2px solid #111;
+  border-radius: 15px 11px 17px 10px;
+  background: #111;
+  color: #fff;
+  box-shadow: 3px 4px 0 #777;
+  font-weight: 900;
+}
+
+.authFooter {
+  text-align: center;
+}
+
+.authFooter a {
+  color: #111;
+  font-weight: 900;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+}
+
+.message {
+  margin: 0;
+  padding: 11px 12px;
+  border: 2px solid #111;
+  border-radius: 13px 10px 15px 9px;
+  background: #fff;
+  color: #111;
+  box-shadow: 2px 3px 0 #111;
+  font-size: 0.86rem;
+  font-weight: 800;
+}
+
+.error {
+  background: #ffe9e3;
+}
+
+.success {
+  background: #e8f3df;
+}
