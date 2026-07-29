@@ -3,23 +3,15 @@
   display: grid;
   place-items: center;
   padding: 24px;
-  background:
-    radial-gradient(circle at 12% 10%, rgba(49, 95, 70, 0.14), transparent 22rem),
-    linear-gradient(90deg, rgba(23, 35, 28, 0.035) 1px, transparent 1px),
-    linear-gradient(180deg, rgba(23, 35, 28, 0.03) 1px, transparent 1px),
-    #f7f4ea;
-  background-size: auto, 22px 22px, 22px 22px, auto;
+  background: #ffffff;
 }
 
 .authCard {
-  width: min(100%, 430px);
+  width: min(100%, 402px);
   display: grid;
-  gap: 22px;
-  padding: 28px 22px;
-  border: 2px solid #111;
-  border-radius: 26px 20px 29px 18px;
-  background: #fffef8;
-  box-shadow: 7px 8px 0 #111, 0 24px 70px rgba(0, 0, 0, 0.12);
+  gap: 24px;
+  padding: 68px 37px 37px;
+  background: #ffffff;
 }
 
 .authHeader {
@@ -34,16 +26,29 @@
 }
 
 .authHeader h1 {
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 2.35rem;
-  font-weight: 500;
-  line-height: 1;
+  font-family: var(--font-kirang), cursive;
+  font-size: 2.5rem;
+  font-weight: 400;
+  line-height: 1.3;
+  letter-spacing: -0.8px;
+}
+
+.authHeader h2 {
+  margin: 0;
+  font-family: var(--font-kirang), cursive;
+  font-size: 2.5rem;
+  font-weight: 400;
+  line-height: 1.3;
+  letter-spacing: -0.8px;
 }
 
 .authHeader p,
 .authFooter {
-  color: #555;
-  font-size: 0.94rem;
+  color: #6c7278;
+  font-family: var(--font-kirang), cursive;
+  font-size: 1.35rem;
+  line-height: 1.4;
+  letter-spacing: -0.24px;
 }
 
 .authForm {
@@ -53,40 +58,44 @@
 
 .authForm label {
   display: grid;
-  gap: 7px;
-  color: #111;
-  font-size: 0.78rem;
-  font-weight: 850;
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
+  gap: 4px;
+  color: #6c7278;
+  font-family: var(--font-kirang), cursive;
+  font-size: 1.05rem;
+  font-weight: 400;
+  letter-spacing: -0.3px;
 }
 
 .authForm input {
   width: 100%;
   min-width: 0;
-  padding: 13px 12px;
-  border: 2px solid #111;
-  border-radius: 13px 10px 15px 9px;
+  height: 48px;
+  padding: 0 14px;
+  border: 1px solid #edf1f3;
+  border-radius: 10px;
   outline: none;
   background: #fff;
-  color: #111;
-  box-shadow: 2px 3px 0 #111;
+  color: #1a1c1e;
+  box-shadow: 0 1px 2px rgba(228, 229, 231, 0.24);
+  font-family: var(--font-geist-sans), Arial, sans-serif;
 }
 
 .authForm input:focus {
-  box-shadow: 4px 5px 0 #111;
-  transform: translate(-1px, -1px);
+  border-color: #4d81e7;
+  box-shadow: 0 0 0 3px rgba(77, 129, 231, 0.16);
 }
 
 .authForm button {
-  min-height: 52px;
+  min-height: 48px;
   margin-top: 4px;
-  border: 2px solid #111;
-  border-radius: 15px 11px 17px 10px;
-  background: #111;
+  border: 1px solid #ffffff;
+  border-radius: 10px;
+  background: #1d61e7;
   color: #fff;
-  box-shadow: 3px 4px 0 #777;
-  font-weight: 900;
+  box-shadow: 0 1px 2px rgba(37, 62, 167, 0.48), 0 0 0 1px #375dfb;
+  font-family: var(--font-kirang), cursive;
+  font-size: 2rem;
+  font-weight: 400;
 }
 
 .authFooter {
@@ -94,23 +103,20 @@
 }
 
 .authFooter a {
-  color: #111;
-  font-weight: 900;
-  text-decoration: underline;
-  text-decoration-thickness: 2px;
-  text-underline-offset: 4px;
+  color: #4d81e7;
+  font-weight: 400;
 }
 
 .message {
   margin: 0;
   padding: 11px 12px;
-  border: 2px solid #111;
-  border-radius: 13px 10px 15px 9px;
+  border: 1px solid #edf1f3;
+  border-radius: 10px;
   background: #fff;
-  color: #111;
-  box-shadow: 2px 3px 0 #111;
+  color: #1a1c1e;
+  box-shadow: 0 1px 2px rgba(228, 229, 231, 0.24);
   font-size: 0.86rem;
-  font-weight: 800;
+  font-weight: 650;
 }
 
 .error {
@@ -119,4 +125,222 @@
 
 .success {
   background: #e8f3df;
+}
+
+.figmaAuthPage {
+  align-content: start;
+  justify-items: center;
+  padding: 0;
+  background: #ffffff;
+}
+
+.signupScreen {
+  width: min(100%, 402px);
+  min-height: min(100svh, 874px);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 0;
+  padding: 68px 37px 16px;
+  background: #ffffff;
+  color: #1a1c1e;
+}
+
+.backLink {
+  width: 24px;
+  height: 24px;
+  display: inline-grid;
+  place-items: center;
+  color: #1a1c1e;
+}
+
+.signupHeader {
+  display: grid;
+  gap: 12px;
+  margin-top: 44px;
+}
+
+.signupHeader h1,
+.signupHeader p,
+.signupFooter {
+  margin: 0;
+}
+
+.signupHeader h1 {
+  color: #1a1c1e;
+  font-size: 40px;
+  font-weight: 400;
+  line-height: 1.3;
+  letter-spacing: -0.8px;
+}
+
+.signupHeader p {
+  width: 300px;
+  color: #6c7278;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: -0.24px;
+}
+
+.signupForm {
+  display: grid;
+  gap: 13px;
+  margin-top: 5px;
+}
+
+.signupForm label {
+  display: grid;
+  gap: 2px;
+  color: #6c7278;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.6;
+  letter-spacing: -0.3px;
+}
+
+.signupForm input {
+  width: 100%;
+  min-width: 0;
+  height: 46px;
+  border: 1px solid #edf1f3;
+  border-radius: 10px;
+  outline: none;
+  background: #ffffff;
+  color: #1a1c1e;
+  box-shadow: 0 1px 2px rgba(228, 229, 231, 0.24);
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: -0.14px;
+}
+
+.signupForm input::placeholder {
+  color: #1a1c1e;
+  opacity: 1;
+}
+
+.signupForm > label > input,
+.inputWithIcon input {
+  padding: 0 14px;
+}
+
+.inputWithIcon,
+.phoneField {
+  height: 46px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  border: 1px solid #edf1f3;
+  border-radius: 10px;
+  background: #ffffff;
+  box-shadow: 0 1px 2px rgba(228, 229, 231, 0.24);
+}
+
+.inputWithIcon input,
+.phoneField input {
+  height: 100%;
+  flex: 1;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.inputWithIcon svg,
+.phoneField svg {
+  flex: 0 0 auto;
+  margin-right: 14px;
+  color: #acb5bb;
+}
+
+.phoneField input {
+  padding: 0 14px 0 0;
+}
+
+.countrySelect {
+  width: 62px;
+  height: 48px;
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  border-right: 1px solid #edf1f3;
+  background: #ffffff;
+}
+
+.countryFlag {
+  width: 18px;
+  height: 18px;
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  border-radius: 50%;
+}
+
+.countryFlag img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.countryFlag img:nth-child(3) {
+  width: 9px;
+  height: 9px;
+}
+
+.countryFlag img:nth-child(4) {
+  width: 6px;
+  height: 9px;
+  top: 1px;
+  left: 1px;
+}
+
+.signupForm button {
+  height: 48px;
+  margin-top: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #ffffff;
+  border-radius: 10px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0)),
+    #1d61e7;
+  color: #ffffff;
+  box-shadow: 0 1px 2px rgba(37, 62, 167, 0.48), 0 0 0 1px #375dfb;
+  font-family: inherit;
+  font-size: 32px;
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: -0.32px;
+}
+
+.signupFooter {
+  margin-top: 8px;
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  color: #6c7278;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: -0.15px;
+  white-space: nowrap;
+}
+
+.signupFooter a {
+  color: #4d81e7;
+}
+
+@media (max-width: 440px) {
+  .signupScreen {
+    width: 100%;
+    min-height: 100svh;
+    padding-right: max(37px, calc((100vw - 328px) / 2));
+    padding-left: max(37px, calc((100vw - 328px) / 2));
+  }
 }

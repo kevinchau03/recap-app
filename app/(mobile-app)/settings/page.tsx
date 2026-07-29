@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { logout } from "./actions";
 import styles from "../mobile.module.css";
 
 export const metadata: Metadata = {
@@ -29,6 +30,9 @@ export default function SettingsPage() {
         <button type="button"><span>Notifications</span><span aria-hidden="true">→</span></button>
         <button type="button"><span>Privacy</span><span aria-hidden="true">→</span></button>
         <button type="button"><span>Help &amp; support</span><span aria-hidden="true">→</span></button>
+        <form action={logout}>
+          <button type="submit"><span>Log out</span><span aria-hidden="true">→</span></button>
+        </form>
       </section>
     </>
   );
