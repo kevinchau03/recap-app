@@ -7,6 +7,7 @@ type LoginPageProps = {
   searchParams: Promise<{
     error?: string;
     message?: string;
+    next?: string;
   }>;
 };
 
@@ -16,7 +17,7 @@ export const metadata: Metadata = {
 };
 
 export default async function LoginPage({ searchParams }: LoginPageProps) {
-  const { error, message } = await searchParams;
+  const { error, message, next } = await searchParams;
 
   return (
     <main className={styles.authPage}>
@@ -30,6 +31,8 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
         {message ? <p className={`${styles.message} ${styles.success}`}>{message}</p> : null}
 
         <form className={styles.authForm} action={login}>
+          <input name="next" type="hidden" value={next ?? "/home"} />
+
           <label htmlFor="email">
             Email
             <input id="email" name="email" type="email" autoComplete="email" required />
@@ -44,7 +47,8 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
         </form>
 
         <p className={styles.authFooter}>
-          Need an account? <Link href="/signup">Sign up</Link>
+          Need an account?{" "}
+          <Link href={next ? `/signup?next=${encodeURIComponent(next)}` : "/signup"}>Sign up</Link>
         </p>
       </section>
     </main>

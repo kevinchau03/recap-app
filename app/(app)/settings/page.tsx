@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { logout } from "./actions";
-import styles from "../mobile.module.css";
+import styles from "../app.module.css";
 
 export const metadata: Metadata = {
   title: "Settings · DeMems",

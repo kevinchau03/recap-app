@@ -6,7 +6,9 @@ import { redirect } from "next/navigation";
 import { createClient } from "@/utils/supabase/server";
 
 const redirectWithMessage = (path: string, type: "error" | "message", message: string) => {
-  redirect(`${path}?${type}=${encodeURIComponent(message)}`);
+  const separator = path.includes("?") ? "&" : "?";
+
+  redirect(`${path}${separator}${type}=${encodeURIComponent(message)}`);
 };
 
 const getAuthErrorMessage = (error: unknown) => {
@@ -21,13 +23,32 @@ const getAuthErrorMessage = (error: unknown) => {
   return "Something went wrong. Please try again.";
 };
 
+const getSafeRedirectPath = (value: FormDataEntryValue | null) => {
+  const path = String(value ?? "").trim();
+
+  if (!path.startsWith("/") || path.startsWith("//")) {
+    return "/home";
+  }
+
+  return path;
+};
+
+const withNextPath = (path: string, nextPath: string) => {
+  if (nextPath === "/home") {
+    return path;
+  }
+
+  return `${path}?next=${encodeURIComponent(nextPath)}`;
+};
+
 export async function login(formData: FormData) {
   const supabase = await createClient();
   const email = String(formData.get("email") ?? "").trim();
   const password = String(formData.get("password") ?? "");
+  const nextPath = getSafeRedirectPath(formData.get("next"));
 
   if (!email || !password) {
-    redirectWithMessage("/login", "error", "Email and password are required.");
+    redirectWithMessage(withNextPath("/login", nextPath), "error", "Email and password are required.");
   }
 
   const { error } = await supabase.auth
@@ -38,11 +59,11 @@ export async function login(formData: FormData) {
     .catch((error: unknown) => ({ error: new Error(getAuthErrorMessage(error)) }));
 
   if (error) {
-    redirectWithMessage("/login", "error", error.message);
+    redirectWithMessage(withNextPath("/login", nextPath), "error", error.message);
   }
 
   revalidatePath("/", "layout");
-  redirect("/home");
+  redirect(nextPath);
 }
 
 export async function signup(formData: FormData) {
@@ -52,10 +73,11 @@ export async function signup(formData: FormData) {
   const birthDate = String(formData.get("birthDate") ?? "").trim();
   const phoneNumber = String(formData.get("phoneNumber") ?? "").trim();
   const password = String(formData.get("password") ?? "");
+  const nextPath = getSafeRedirectPath(formData.get("next"));
   const origin = (await headers()).get("origin");
 
   if (!fullName || !email || !birthDate || !phoneNumber || !password) {
-    redirectWithMessage("/signup", "error", "Please fill in every field.");
+    redirectWithMessage(withNextPath("/signup", nextPath), "error", "Please fill in every field.");
   }
 
   const { data, error } = await supabase.auth
@@ -63,7 +85,9 @@ export async function signup(formData: FormData) {
       email,
       password,
       options: {
-        emailRedirectTo: origin ? `${origin}/auth/callback` : undefined,
+        emailRedirectTo: origin
+          ? `${origin}/auth/callback?next=${encodeURIComponent(nextPath)}`
+          : undefined,
         data: {
           full_name: fullName,
           birth_date: birthDate,
@@ -77,7 +101,7 @@ export async function signup(formData: FormData) {
     }));
 
   if (error) {
-    redirectWithMessage("/signup", "error", error.message);
+    redirectWithMessage(withNextPath("/signup", nextPath), "error", error.message);
   }
 
   if (data.session && data.user) {
@@ -88,11 +112,11 @@ export async function signup(formData: FormData) {
     });
 
     revalidatePath("/", "layout");
-    redirect("/home");
+    redirect(nextPath);
   }
 
   redirectWithMessage(
-    "/login",
+    withNextPath("/login", nextPath),
     "message",
     "Account created. Check your email to confirm your account, then log in.",
   );

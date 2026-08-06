@@ -4,7 +4,7 @@ import Link from "next/link";
 import { ArrowLeft, ArrowRight, Check, X } from "lucide-react";
 import { FormEvent, useState, useTransition } from "react";
 import { createTrip } from "./actions";
-import styles from "../../mobile.module.css";
+import styles from "../../app.module.css";
 
 const steps = ["Name", "Dates", "Destination"];
 

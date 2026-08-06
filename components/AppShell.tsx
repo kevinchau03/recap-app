@@ -2,9 +2,9 @@
 
 import { usePathname } from "next/navigation";
 import Navigation from "@/components/Navigation";
-import styles from "@/app/(mobile-app)/mobile.module.css";
+import styles from "@/app/(app)/app.module.css";
 
-export default function MobileAppShell({ children }: { children: React.ReactNode }) {
+export default function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
 
   if (pathname === "/trips/new") {
@@ -12,8 +12,8 @@ export default function MobileAppShell({ children }: { children: React.ReactNode
   }
 
   return (
-    <main className={styles.mobileRoute}>
-      <section className={styles.mobileShell} aria-label="DeMems mobile app">
+    <main className={styles.appRoute}>
+      <section className={styles.appShell} aria-label="DeMems app">
         {children}
         <Navigation />
       </section>

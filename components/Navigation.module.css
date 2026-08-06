@@ -32,3 +32,23 @@
   color: #fff;
   box-shadow: 0 1px 2px rgba(37, 62, 167, 0.48), 0 0 0 1px #375dfb;
 }
+
+@media (min-width: 700px) {
+  .navigation {
+    width: 76px;
+    height: auto;
+    right: auto;
+    bottom: auto;
+    left: 24px;
+    top: 50%;
+    grid-template-columns: 1fr;
+    grid-auto-rows: 60px;
+    padding: 8px;
+    border-radius: 24px;
+    transform: translateY(-50%);
+  }
+
+  .item {
+    height: 60px;
+  }
+}

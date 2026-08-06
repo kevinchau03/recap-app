@@ -1,8 +1,8 @@
-import styles from "./mobile.module.css";
+import styles from "./app.module.css";
 
 export default function Loading() {
   return (
-    <main className={styles.mobileRoute}>
+    <main className={styles.appRoute}>
       <section className={styles.loadingShell} aria-label="Loading DeMems">
         <div className={styles.loadingLogo} aria-hidden="true">
           <span className={styles.loadingMark}>D</span>

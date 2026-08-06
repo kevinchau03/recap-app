@@ -41,6 +41,25 @@ a {
   text-decoration: none;
 }
 
+.offline-banner {
+  position: fixed;
+  right: max(16px, env(safe-area-inset-right));
+  bottom: max(16px, env(safe-area-inset-bottom));
+  left: max(16px, env(safe-area-inset-left));
+  z-index: 50;
+  margin: 0 auto;
+  width: min(100% - 32px, 370px);
+  padding: 12px 14px;
+  border: 1px solid #ffe2a8;
+  border-radius: 10px;
+  background: #fff8c7;
+  color: #1a1c1e;
+  box-shadow: 0 12px 30px rgba(26, 28, 30, 0.14);
+  font-size: 0.9rem;
+  font-weight: 650;
+  line-height: 1.4;
+}
+
 .sr-only {
   width: 1px;
   height: 1px;

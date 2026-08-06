@@ -1,31 +1,34 @@
-.mobileRoute {
+.appRoute {
   min-height: 100svh;
   display: grid;
-  place-items: center;
+  justify-items: center;
+  align-items: start;
   padding: 0;
-  background: #ffffff;
+  background: #f8fafc;
 }
 
-.mobileShell {
-  width: min(100%, 402px);
+.appShell {
+  width: 100%;
+  max-width: 1120px;
   min-height: 100svh;
   position: relative;
   overflow: clip;
   display: flex;
   flex-direction: column;
-  padding: 48px 37px 112px;
+  padding: max(48px, env(safe-area-inset-top)) clamp(28px, 5vw, 56px) max(112px, calc(96px + env(safe-area-inset-bottom)));
   background: #ffffff;
   color: #1a1c1e;
 }
 
 .loadingShell {
-  width: min(100%, 402px);
+  width: 100%;
+  max-width: 560px;
   min-height: 100svh;
   display: grid;
   place-items: center;
   align-content: center;
   gap: 22px;
-  padding: 37px;
+  padding: clamp(28px, 7vw, 42px);
   background: #ffffff;
 }
 
@@ -65,6 +68,74 @@
   font-weight: 400;
 }
 
+.offlineShell {
+  width: 100%;
+  max-width: 560px;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 24px;
+  padding: max(48px, env(safe-area-inset-top)) clamp(28px, 7vw, 42px) max(48px, env(safe-area-inset-bottom));
+  background: #ffffff;
+  color: #1a1c1e;
+}
+
+.offlineIcon {
+  width: 96px;
+  height: 96px;
+  display: block;
+  border-radius: 24px;
+  box-shadow: 0 1px 2px rgba(228, 229, 231, 0.24);
+}
+
+.offlineCopy {
+  display: grid;
+  gap: 10px;
+}
+
+.offlineCopy p,
+.offlineCopy h1 {
+  margin: 0;
+}
+
+.offlineCopy p {
+  color: #4d81e7;
+  font-family: var(--font-kirang), cursive;
+  font-size: 1.1rem;
+  font-weight: 400;
+}
+
+.offlineCopy h1 {
+  font-family: var(--font-kirang), cursive;
+  font-size: 2.65rem;
+  font-weight: 400;
+  line-height: 1.02;
+  letter-spacing: 0;
+}
+
+.offlineCopy span {
+  color: #6c7278;
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+.offlineAction {
+  width: 100%;
+  min-height: 50px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #ffffff;
+  border-radius: 10px;
+  background: #1d61e7;
+  color: #ffffff;
+  box-shadow: 0 1px 2px rgba(37, 62, 167, 0.48), 0 0 0 1px #375dfb;
+  font-family: var(--font-kirang), cursive;
+  font-size: 1.45rem;
+  font-weight: 400;
+}
+
 .loadingDots {
   display: flex;
   gap: 8px;
@@ -95,7 +166,7 @@
   }
 }
 
-.mobileHeader,
+.appHeader,
 .pageHeader {
   display: flex;
   align-items: center;
@@ -103,15 +174,15 @@
   gap: 16px;
 }
 
-.mobileHeader p,
-.mobileHeader h1,
+.appHeader p,
+.appHeader h1,
 .pageHeader p,
 .pageHeader h1,
-.mobileHero p,
-.mobileHero h2,
+.appHero p,
+.appHero h2,
 .tripRow h3,
 .tripRow p,
-.mobileSectionHeading h2,
+.sectionHeading h2,
 .profileCard h2,
 .profileCard p,
 .tripCardCopy p,
@@ -119,7 +190,7 @@
   margin: 0;
 }
 
-.mobileHeader p,
+.appHeader p,
 .pageHeader p {
   color: #6c7278;
   font-family: var(--font-kirang), cursive;
@@ -129,7 +200,7 @@
   letter-spacing: -0.16px;
 }
 
-.mobileHeader h1,
+.appHeader h1,
 .pageHeader h1 {
   margin-top: 4px;
   font-family: var(--font-kirang), cursive;
@@ -165,8 +236,8 @@
   font-size: 1.05rem;
 }
 
-.mobileHero {
-  min-height: 190px;
+.appHero {
+  min-height: clamp(190px, 28vw, 300px);
   margin-top: 24px;
   display: flex;
   flex-direction: column;
@@ -181,25 +252,25 @@
   box-shadow: 0 1px 2px rgba(37, 62, 167, 0.48), 0 0 0 1px #375dfb;
 }
 
-.mobileHero p { font-family: var(--font-kirang), cursive; font-size: 1.05rem; font-weight: 400; letter-spacing: -0.16px; opacity: 0.86; }
-.mobileHero h2 { margin-top: 8px; font-family: var(--font-kirang), cursive; font-size: 2.25rem; font-weight: 400; letter-spacing: -0.32px; line-height: 1.05; }
-.mobileHero span { margin-top: 8px; color: rgba(255, 255, 255, 0.84); font-size: 0.88rem; line-height: 1.4; }
+.appHero p { font-family: var(--font-kirang), cursive; font-size: 1.05rem; font-weight: 400; letter-spacing: -0.16px; opacity: 0.86; }
+.appHero h2 { margin-top: 8px; font-family: var(--font-kirang), cursive; font-size: 2.25rem; font-weight: 400; letter-spacing: -0.32px; line-height: 1.05; }
+.appHero span { margin-top: 8px; color: rgba(255, 255, 255, 0.84); font-size: 0.88rem; line-height: 1.4; }
 
-.quickActions { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 18px; }
+.quickActions { display: grid; grid-template-columns: repeat(2, minmax(0, 220px)); gap: 12px; margin-top: 18px; }
 .quickActions a,
 .quickActions button { min-height: 48px; display: grid; place-items: center; border: 1px solid #edf1f3; border-radius: 10px; background: #fff; color: #1a1c1e; box-shadow: 0 1px 2px rgba(228, 229, 231, 0.24); font-family: var(--font-kirang), cursive; font-size: 1.35rem; font-weight: 400; }
 .quickActions a { border-color: #fff; background: #1d61e7; color: #fff; box-shadow: 0 1px 2px rgba(37, 62, 167, 0.48), 0 0 0 1px #375dfb; }
 
 .tripList { margin-top: 28px; }
-.mobileSectionHeading { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 14px; }
-.mobileSectionHeading h2 { font-family: var(--font-kirang), cursive; font-size: 1.7rem; font-weight: 400; letter-spacing: -0.24px; }
-.mobileSectionHeading a { color: #4d81e7; font-family: var(--font-kirang), cursive; font-size: 1.05rem; font-weight: 400; }
+.sectionHeading { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 14px; }
+.sectionHeading h2 { font-family: var(--font-kirang), cursive; font-size: 1.7rem; font-weight: 400; letter-spacing: -0.24px; }
+.sectionHeading a { color: #4d81e7; font-family: var(--font-kirang), cursive; font-size: 1.05rem; font-weight: 400; }
 .tripRow { display: grid; grid-template-columns: 64px 1fr; align-items: center; gap: 14px; padding: 12px 0; }
 .tripThumbnail { width: 64px; height: 64px; display: grid; place-items: center; border: 1px solid #edf1f3; border-radius: 16px; background: #f8fafc; box-shadow: 0 1px 2px rgba(228, 229, 231, 0.24); color: #1a1c1e; font-family: var(--font-kirang), cursive; font-size: 1rem; font-weight: 400; }
 .tripRow h3 { font-size: 0.98rem; font-weight: 650; }
 .tripRow p { margin-top: 5px; color: #6c7278; font-size: 0.84rem; }
 
-.fullTripList { display: grid; gap: 16px; margin-top: 26px; }
+.fullTripList { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 310px), 1fr)); gap: 16px; margin-top: 26px; }
 .tripCard { overflow: hidden; display: grid; grid-template-columns: 104px 1fr; min-height: 124px; border: 1px solid #edf1f3; border-radius: 18px; background: #fff; box-shadow: 0 1px 2px rgba(228, 229, 231, 0.24); }
 .tripCardArt { display: grid; place-items: center; border-right: 1px solid #edf1f3; background: #f8fafc; color: #1a1c1e; font-family: var(--font-kirang), cursive; font-size: 1.25rem; font-weight: 400; }
 .tripCardCopy { display: flex; flex-direction: column; justify-content: center; padding: 16px; }
@@ -220,13 +291,13 @@
 .emptyState h2 { font-family: var(--font-kirang), cursive; font-size: 1.6rem; font-weight: 400; }
 .emptyState p { color: #6c7278; font-size: 0.86rem; }
 .emptyState a { width: fit-content; margin-top: 4px; color: #4d81e7; font-family: var(--font-kirang), cursive; font-size: 1rem; font-weight: 400; }
-.tripDetailHero { min-height: 210px; margin-top: 24px; display: flex; flex-direction: column; justify-content: flex-end; padding: 20px; border: 0; border-radius: 22px; background: #1d61e7; color: #fff; box-shadow: 0 1px 2px rgba(37, 62, 167, 0.48), 0 0 0 1px #375dfb; }
+.tripDetailHero { min-height: clamp(210px, 30vw, 340px); margin-top: 24px; display: flex; flex-direction: column; justify-content: flex-end; padding: 20px; border: 0; border-radius: 22px; background: #1d61e7; color: #fff; box-shadow: 0 1px 2px rgba(37, 62, 167, 0.48), 0 0 0 1px #375dfb; }
 .tripDetailHero p,
 .tripDetailHero h2 { margin: 0; }
 .tripDetailHero p { font-family: var(--font-kirang), cursive; font-size: 1.05rem; font-weight: 400; letter-spacing: -0.16px; opacity: 0.86; }
 .tripDetailHero h2 { margin-top: 8px; font-family: var(--font-kirang), cursive; font-size: 2.25rem; font-weight: 400; line-height: 1.05; letter-spacing: -0.32px; }
 .tripDetailHero span { margin-top: 8px; color: rgba(255, 255, 255, 0.84); font-size: 0.9rem; }
-.tripActionGrid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 18px; }
+.tripActionGrid { display: grid; grid-template-columns: repeat(2, minmax(0, 220px)); gap: 12px; margin-top: 18px; }
 .tripActionGrid button,
 .uploadAction { min-height: 58px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 0 10px; border: 1px solid #edf1f3; border-radius: 10px; background: #fff; color: #1a1c1e; box-shadow: 0 1px 2px rgba(228, 229, 231, 0.24); font-family: var(--font-kirang), cursive; font-size: 1rem; font-weight: 400; text-align: center; }
 .uploadActions { display: contents; }
@@ -234,7 +305,7 @@
 .uploadAction input { position: absolute; inset: 0; opacity: 0; pointer-events: none; }
 .uploadActionPrimary { border-color: #fff; background: #1d61e7; color: #fff; box-shadow: 0 1px 2px rgba(37, 62, 167, 0.48), 0 0 0 1px #375dfb; }
 .uploadMessage { grid-column: 1 / -1; margin: 0; color: #6c7278; font-size: 0.82rem; }
-.photoGrid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: 22px; }
+.photoGrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 12px; margin-top: 22px; }
 .photoTile { aspect-ratio: 1; overflow: hidden; margin: 0; border-radius: 16px; background: #f8fafc; }
 .photoTile img { width: 100%; height: 100%; display: block; object-fit: cover; }
 .invitePanel { display: grid; gap: 14px; margin-top: 18px; padding: 18px; border: 1px solid #edf1f3; border-radius: 18px; background: #fff; box-shadow: 0 1px 2px rgba(228, 229, 231, 0.24); }
@@ -243,7 +314,7 @@
 .invitePanelHeader h2 { margin: 0; }
 .invitePanelHeader p { color: #6c7278; font-size: 0.78rem; font-weight: 650; }
 .invitePanelHeader h2 { margin-top: 4px; font-family: var(--font-kirang), cursive; font-size: 1.65rem; font-weight: 400; line-height: 1.05; }
-.qrFrame { aspect-ratio: 1; width: min(100%, 248px); display: grid; place-items: center; justify-self: center; padding: 14px; border: 1px solid #edf1f3; border-radius: 14px; background: #fff; color: #1a1c1e; }
+.qrFrame { aspect-ratio: 1; width: 100%; max-width: 248px; display: grid; place-items: center; justify-self: center; padding: 14px; border: 1px solid #edf1f3; border-radius: 14px; background: #fff; color: #1a1c1e; }
 .qrFrame svg { width: 100%; height: 100%; display: block; shape-rendering: crispEdges; }
 .qrFrame span { color: #6c7278; font-size: 0.86rem; }
 .shareLinkButton,
@@ -303,7 +374,8 @@
 }
 
 .creationProgress {
-  width: min(100%, 680px);
+  width: 100%;
+  max-width: 680px;
   margin: 20px auto 0;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -361,7 +433,8 @@
 }
 
 .creationForm {
-  width: min(100%, 680px);
+  width: 100%;
+  max-width: 680px;
   flex: 1;
   margin: 32px auto 0;
   display: flex;
@@ -496,9 +569,41 @@
   cursor: not-allowed;
 }
 
+@media (min-width: 700px) {
+  .appRoute {
+    padding: 32px 32px 32px 112px;
+    background: #f8fafc;
+  }
+
+  .appShell,
+  .loadingShell,
+  .offlineShell {
+    min-height: calc(100svh - 64px);
+    border: 1px solid #edf1f3;
+    border-radius: 18px;
+    box-shadow: 0 12px 34px rgba(26, 28, 30, 0.06);
+  }
+
+  .appHero,
+  .tripDetailHero {
+    padding: 28px;
+  }
+
+  .tripList {
+    max-width: 720px;
+  }
+
+  .invitePanel {
+    max-width: 520px;
+  }
+}
+
 @media (max-width: 600px) {
-  .mobileRoute { padding: 0; }
-  .mobileShell { width: 100%; min-height: 100svh; padding-right: max(28px, calc((100vw - 328px) / 2)); padding-left: max(28px, calc((100vw - 328px) / 2)); }
+  .appRoute { padding: 0; background: #ffffff; }
+  .appShell { max-width: none; }
+  .quickActions,
+  .tripActionGrid { grid-template-columns: 1fr 1fr; }
+  .photoGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
   .creationShell { padding: max(48px, env(safe-area-inset-top)) max(28px, calc((100vw - 328px) / 2)) max(22px, env(safe-area-inset-bottom)); }
   .creationProgress { margin-top: 14px; }
   .progressStep p { font-size: 0.65rem; }

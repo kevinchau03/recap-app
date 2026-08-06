@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { createClient } from "@/utils/supabase/server";
-import styles from "../mobile.module.css";
+import styles from "../app.module.css";
 
 type Trip = {
   id: string;

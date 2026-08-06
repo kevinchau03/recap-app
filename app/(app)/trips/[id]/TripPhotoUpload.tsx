@@ -4,7 +4,7 @@ import { Camera, ImagePlus } from "lucide-react";
 import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/utils/supabase/client";
-import styles from "../../mobile.module.css";
+import styles from "../../app.module.css";
 
 const BUCKET = "trip-media";
 const MAX_FILE_SIZE = 10 * 1024 * 1024;

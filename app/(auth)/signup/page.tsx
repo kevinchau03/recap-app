@@ -10,6 +10,7 @@ type SignupPageProps = {
   searchParams: Promise<{
     error?: string;
     message?: string;
+    next?: string;
   }>;
 };
 
@@ -24,7 +25,7 @@ const kirang = Kirang_Haerang({
 });
 
 export default async function SignupPage({ searchParams }: SignupPageProps) {
-  const { error, message } = await searchParams;
+  const { error, message, next } = await searchParams;
 
   return (
     <main className={`${styles.authPage} ${styles.figmaAuthPage}`}>
@@ -45,6 +46,8 @@ export default async function SignupPage({ searchParams }: SignupPageProps) {
         {message ? <p className={`${styles.message} ${styles.success}`}>{message}</p> : null}
 
         <form className={styles.signupForm} action={signup}>
+          <input name="next" type="hidden" value={next ?? "/home"} />
+
           <label htmlFor="fullName">
             Full Name
             <input
@@ -126,7 +129,8 @@ export default async function SignupPage({ searchParams }: SignupPageProps) {
         </form>
 
         <p className={styles.signupFooter}>
-          Already have an account? <Link href="/login">Login</Link>
+          Already have an account?{" "}
+          <Link href={next ? `/login?next=${encodeURIComponent(next)}` : "/login"}>Login</Link>
         </p>
       </section>
     </main>

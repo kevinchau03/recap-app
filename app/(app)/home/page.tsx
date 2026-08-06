@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { createClient } from "@/utils/supabase/server";
-import styles from "../mobile.module.css";
+import styles from "../app.module.css";
 
 type AppUser = {
   display_name: string | null;
@@ -71,7 +71,7 @@ export default async function HomePage() {
 
   return (
     <>
-      <header className={styles.mobileHeader}>
+      <header className={styles.appHeader}>
         <div>
           <p>Welcome back</p>
           <h1>{userName}</h1>
@@ -81,7 +81,7 @@ export default async function HomePage() {
         </Link>
       </header>
 
-      <section className={styles.mobileHero} aria-label="Current trip">
+      <section className={styles.appHero} aria-label="Current trip">
         <p>{currentTrip ? "Current trip" : "No trips yet"}</p>
         <h2>{currentTrip?.name ?? "Create your first trip"}</h2>
         <span>
@@ -100,7 +100,7 @@ export default async function HomePage() {
       </section>
 
       <section className={styles.tripList} aria-label="Recent trips">
-        <div className={styles.mobileSectionHeading}>
+        <div className={styles.sectionHeading}>
           <h2>Recent trips</h2>
           <Link href="/trips">See all</Link>
         </div>

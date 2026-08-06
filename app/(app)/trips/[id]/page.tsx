@@ -5,7 +5,7 @@ import { notFound } from "next/navigation";
 import { createClient } from "@/utils/supabase/server";
 import TripInvitePanel from "./TripInvitePanel";
 import TripPhotoUpload from "./TripPhotoUpload";
-import styles from "../../mobile.module.css";
+import styles from "../../app.module.css";
 
 type TripPageProps = {
   params: Promise<{

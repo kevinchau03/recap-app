@@ -4,7 +4,7 @@ import { Copy, Link2, QrCode as QrCodeIcon } from "lucide-react";
 import { useEffect, useMemo, useState, useTransition } from "react";
 import { getOrCreateTripInvite } from "./actions";
 import QrCode from "./QrCode";
-import styles from "../../mobile.module.css";
+import styles from "../../app.module.css";
 
 type TripInvitePanelProps = {
   tripId: string;

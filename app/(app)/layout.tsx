@@ -1,10 +1,10 @@
-import MobileAppShell from "@/components/MobileAppShell";
+import AppShell from "@/components/AppShell";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 import { Suspense } from "react";
 import Loading from "./loading";
 
-async function ProtectedMobileApp({
+async function ProtectedApp({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -18,17 +18,17 @@ async function ProtectedMobileApp({
     redirect("/login?message=Please%20log%20in%20to%20continue.");
   }
 
-  return <MobileAppShell>{children}</MobileAppShell>;
+  return <AppShell>{children}</AppShell>;
 }
 
-export default function MobileAppLayout({
+export default function AppLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
     <Suspense fallback={<Loading />}>
-      <ProtectedMobileApp>{children}</ProtectedMobileApp>
+      <ProtectedApp>{children}</ProtectedApp>
     </Suspense>
   );
 }
