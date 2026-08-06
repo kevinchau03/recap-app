@@ -306,8 +306,25 @@
 .uploadActionPrimary { border-color: #fff; background: #1d61e7; color: #fff; box-shadow: 0 1px 2px rgba(37, 62, 167, 0.48), 0 0 0 1px #375dfb; }
 .uploadMessage { grid-column: 1 / -1; margin: 0; color: #6c7278; font-size: 0.82rem; }
 .photoGrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 12px; margin-top: 22px; }
-.photoTile { aspect-ratio: 1; overflow: hidden; margin: 0; border-radius: 16px; background: #f8fafc; }
+.photoTileLink { min-width: 0; color: inherit; }
+.photoTile { aspect-ratio: 1; overflow: hidden; position: relative; margin: 0; border-radius: 16px; background: #f8fafc; }
 .photoTile img { width: 100%; height: 100%; display: block; object-fit: cover; }
+.missingDetailsBadge { position: absolute; right: 8px; bottom: 8px; left: 8px; min-height: 28px; display: grid; place-items: center; padding: 5px 8px; border-radius: 8px; background: rgba(26, 28, 30, 0.78); color: #fff; font-size: 0.72rem; font-weight: 700; text-align: center; }
+.photoDetailShell { display: grid; grid-template-columns: minmax(0, 1fr) minmax(280px, 420px); gap: 22px; align-items: start; margin-top: 24px; }
+.photoDetailPreview { overflow: hidden; position: relative; margin: 0; border-radius: 18px; background: #f8fafc; }
+.photoDetailPreview img { width: 100%; height: auto; max-height: 68svh; display: block; object-fit: contain; background: #f8fafc; }
+.missingDetailsNotice { position: absolute; right: 12px; bottom: 12px; padding: 7px 10px; border-radius: 8px; background: rgba(26, 28, 30, 0.78); color: #fff; font-size: 0.78rem; font-weight: 700; }
+.photoDetailsForm { display: grid; gap: 16px; padding: 18px; border: 1px solid #edf1f3; border-radius: 18px; background: #fff; box-shadow: 0 1px 2px rgba(228, 229, 231, 0.24); }
+.photoDetailsForm label { display: grid; gap: 7px; color: #6c7278; font-family: var(--font-kirang), cursive; font-size: 1.05rem; font-weight: 400; letter-spacing: -0.2px; }
+.photoDetailsForm input,
+.photoDetailsForm textarea { width: 100%; min-width: 0; padding: 0 14px; border: 1px solid #edf1f3; border-radius: 10px; outline: none; background: #fff; color: #1a1c1e; box-shadow: 0 1px 2px rgba(228, 229, 231, 0.24); font-family: var(--font-geist-sans), Arial, sans-serif; font-size: 0.95rem; }
+.photoDetailsForm input { height: 48px; }
+.photoDetailsForm textarea { min-height: 112px; padding-top: 12px; resize: vertical; }
+.photoDetailsForm input:focus,
+.photoDetailsForm textarea:focus { border-color: #4d81e7; box-shadow: 0 0 0 3px rgba(77, 129, 231, 0.16); }
+.photoDetailsForm button { min-height: 50px; border: 1px solid #fff; border-radius: 10px; background: #1d61e7; color: #fff; box-shadow: 0 1px 2px rgba(37, 62, 167, 0.48), 0 0 0 1px #375dfb; font-family: var(--font-kirang), cursive; font-size: 1.35rem; font-weight: 400; }
+.checkboxField { grid-template-columns: 18px 1fr; align-items: center; color: #1a1c1e !important; font-family: var(--font-geist-sans), Arial, sans-serif !important; font-size: 0.92rem !important; font-weight: 650 !important; }
+.checkboxField input { width: 18px; height: 18px; padding: 0; box-shadow: none; }
 .invitePanel { display: grid; gap: 14px; margin-top: 18px; padding: 18px; border: 1px solid #edf1f3; border-radius: 18px; background: #fff; box-shadow: 0 1px 2px rgba(228, 229, 231, 0.24); }
 .invitePanelHeader { display: flex; align-items: center; justify-content: space-between; gap: 14px; color: #1a1c1e; }
 .invitePanelHeader p,
@@ -604,6 +621,7 @@
   .quickActions,
   .tripActionGrid { grid-template-columns: 1fr 1fr; }
   .photoGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .photoDetailShell { grid-template-columns: 1fr; }
   .creationShell { padding: max(48px, env(safe-area-inset-top)) max(28px, calc((100vw - 328px) / 2)) max(22px, env(safe-area-inset-bottom)); }
   .creationProgress { margin-top: 14px; }
   .progressStep p { font-size: 0.65rem; }

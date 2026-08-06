@@ -118,6 +118,7 @@ export default function TripPhotoUpload({ tripId }: TripPhotoUploadProps) {
           width: dimensions.width,
           height: dimensions.height,
           original_filename: file.name,
+          metadata_status: "missing",
         });
 
         if (insertError) {

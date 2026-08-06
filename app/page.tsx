@@ -46,6 +46,9 @@ export default function Home() {
             <Link href="/signup" className={styles.navCta}>
               Sign up
             </Link>
+            <Link href="/home" className={styles.navCta}>
+              Go to App
+            </Link>
           </div>
         </nav>
 

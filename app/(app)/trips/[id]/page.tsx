@@ -32,10 +32,16 @@ type TripMediaRecord = {
   width: number | null;
   height: number | null;
   created_at: string;
+  captured_at: string | null;
+  latitude: number | null;
+  longitude: number | null;
+  location_name: string | null;
+  metadata_status: string | null;
 };
 
 type TripMedia = TripMediaRecord & {
   signedUrl: string;
+  isMissingDetails: boolean;
 };
 
 const formatDateRange = (startDate: string | null, endDate: string | null) => {
@@ -79,9 +85,10 @@ const getTripMedia = async (tripId: string) => {
 
   const { data: media } = await supabase
     .from("trip_media")
-    .select("id, storage_path, original_filename, width, height, created_at")
+    .select("id, storage_path, original_filename, width, height, created_at, captured_at, latitude, longitude, location_name, metadata_status")
     .eq("trip_id", tripId)
     .eq("media_type", "photo")
+    .order("captured_at", { ascending: false, nullsFirst: false })
     .order("created_at", { ascending: false })
     .returns<TripMediaRecord[]>();
 
@@ -99,6 +106,12 @@ const getTripMedia = async (tripId: string) => {
         ? {
             ...item,
             signedUrl: data.signedUrl,
+            isMissingDetails:
+              !item.captured_at ||
+              (!item.location_name && (item.latitude === null || item.longitude === null)) ||
+              item.metadata_status === "missing" ||
+              item.metadata_status === "stripped" ||
+              item.metadata_status === "error",
           }
         : null;
     }),
@@ -160,14 +173,23 @@ export default async function TripPage({ params }: TripPageProps) {
       {media.length ? (
         <section className={styles.photoGrid} aria-label="Trip photos">
           {media.map((photo) => (
-            <figure className={styles.photoTile} key={photo.id}>
-              <img
-                alt={photo.original_filename || "Trip photo"}
-                height={photo.height ?? 400}
-                src={photo.signedUrl}
-                width={photo.width ?? 400}
-              />
-            </figure>
+            <Link
+              className={styles.photoTileLink}
+              href={`/trips/${trip.id}/photos/${photo.id}`}
+              key={photo.id}
+            >
+              <figure className={styles.photoTile}>
+                <img
+                  alt={photo.original_filename || "Trip photo"}
+                  height={photo.height ?? 400}
+                  src={photo.signedUrl}
+                  width={photo.width ?? 400}
+                />
+                {photo.isMissingDetails ? (
+                  <figcaption className={styles.missingDetailsBadge}>Missing details</figcaption>
+                ) : null}
+              </figure>
+            </Link>
           ))}
         </section>
       ) : (
