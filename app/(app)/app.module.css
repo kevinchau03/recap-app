@@ -225,9 +225,17 @@
 .avatarButton {
   width: 46px;
   height: 46px;
+  overflow: hidden;
   display: grid;
   place-items: center;
   font-size: 1.45rem;
+}
+
+.avatarButtonImage {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
 }
 
 .smallAction {
@@ -383,9 +391,33 @@
 .joinModalHeader button { width: 40px; height: 40px; flex: 0 0 auto; display: grid; place-items: center; border: 1px solid #edf1f3; border-radius: 10px; background: #fff; color: #1a1c1e; box-shadow: 0 1px 2px rgba(228, 229, 231, 0.24); }
 
 .profileCard { display: flex; align-items: center; gap: 16px; margin-top: 28px; padding: 18px; border-radius: 22px; background: #1d61e7; color: #fff; box-shadow: 0 1px 2px rgba(37, 62, 167, 0.48), 0 0 0 1px #375dfb; }
-.largeAvatar { width: 56px; height: 56px; display: grid; place-items: center; border: 1px solid rgba(255,255,255,.4); border-radius: 16px; font-family: var(--font-kirang), cursive; font-size: 1.8rem; font-weight: 400; }
+.largeAvatar,
+.largeAvatarImage { width: 56px; height: 56px; flex: 0 0 auto; border: 1px solid rgba(255,255,255,.4); border-radius: 16px; }
+.largeAvatar { display: grid; place-items: center; font-family: var(--font-kirang), cursive; font-size: 1.8rem; font-weight: 400; }
+.largeAvatarImage { display: block; object-fit: cover; background: rgba(255,255,255,.18); }
 .profileCard h2 { font-family: var(--font-kirang), cursive; font-size: 1.75rem; font-weight: 400; }
 .profileCard p { margin-top: 5px; color: rgba(255,255,255,.82); font-size: 0.8rem; }
+.avatarUpload { display: grid; gap: 10px; margin-top: 14px; }
+.avatarUploadButton { min-height: 50px; position: relative; overflow: hidden; display: inline-flex; align-items: center; justify-content: center; gap: 8px; border: 1px solid #fff; border-radius: 10px; background: #1d61e7; color: #fff; box-shadow: 0 1px 2px rgba(37, 62, 167, 0.48), 0 0 0 1px #375dfb; font-family: var(--font-kirang), cursive; font-size: 1.25rem; font-weight: 400; cursor: pointer; }
+.avatarUploadButton input { position: absolute; inset: 0; opacity: 0; pointer-events: none; }
+.avatarUploadButton:has(input:disabled) { border-color: #edf1f3; background: #acb5bb; box-shadow: none; cursor: not-allowed; }
+.avatarUploadMessage,
+.avatarUploadError { margin: 0; font-size: 0.82rem; font-weight: 700; line-height: 1.35; }
+.avatarUploadMessage { color: #4d81e7; }
+.avatarUploadError { color: #b42318; }
+.settingsMessage { margin: 18px 0 0; padding: 12px 14px; border: 1px solid #cfe3ff; border-radius: 10px; background: #edf6ff; color: #1d61e7; font-size: 0.86rem; font-weight: 700; line-height: 1.35; }
+.settingsError { border-color: #ffd7ce; background: #ffe9e3; color: #1a1c1e; }
+.settingsPanel { display: grid; gap: 18px; margin-top: 24px; padding: 18px; border: 1px solid #edf1f3; border-radius: 18px; background: #fff; box-shadow: 0 1px 2px rgba(228, 229, 231, 0.24); }
+.settingsPanelHeader { display: grid; gap: 5px; }
+.settingsPanelHeader h2,
+.settingsPanelHeader p { margin: 0; }
+.settingsPanelHeader h2 { font-family: var(--font-kirang), cursive; font-size: 1.75rem; font-weight: 400; line-height: 1.05; }
+.settingsPanelHeader p { color: #6c7278; font-size: 0.86rem; line-height: 1.45; }
+.settingsForm { display: grid; gap: 14px; }
+.settingsForm label { display: grid; gap: 8px; color: #6c7278; font-family: var(--font-kirang), cursive; font-size: 1.05rem; font-weight: 400; letter-spacing: -0.2px; }
+.settingsForm input { width: 100%; min-width: 0; height: 48px; padding: 0 14px; border: 1px solid #edf1f3; border-radius: 10px; outline: none; background: #fff; color: #1a1c1e; box-shadow: 0 1px 2px rgba(228, 229, 231, 0.24); font-family: var(--font-geist-sans), Arial, sans-serif; font-size: 0.95rem; }
+.settingsForm input:focus { border-color: #4d81e7; box-shadow: 0 0 0 3px rgba(77, 129, 231, 0.16); }
+.settingsForm button { min-height: 50px; border: 1px solid #fff; border-radius: 10px; background: #1d61e7; color: #fff; box-shadow: 0 1px 2px rgba(37, 62, 167, 0.48), 0 0 0 1px #375dfb; font-family: var(--font-kirang), cursive; font-size: 1.35rem; font-weight: 400; }
 .settingsList { display: grid; margin-top: 24px; border-block: 1px solid #edf1f3; }
 .settingsList form { display: contents; }
 .settingsList button { display: flex; justify-content: space-between; padding: 17px 4px; border: 0; border-bottom: 1px solid #edf1f3; background: transparent; color: #1a1c1e; font-family: var(--font-kirang), cursive; font-size: 1.25rem; font-weight: 400; text-align: left; }

@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { createClient } from "@/utils/supabase/server";
 import JoinTripButton from "./JoinTripButton";
 import styles from "../app.module.css";
 
 type AppUser = {
+  avatar_url: string | null;
   display_name: string | null;
   username: string | null;
 };
@@ -53,7 +55,7 @@ export default async function HomePage() {
     ? await Promise.all([
         supabase
           .from("users")
-          .select("display_name, username")
+          .select("avatar_url, display_name, username")
           .eq("id", authUser.id)
           .maybeSingle<AppUser>(),
         supabase
@@ -67,6 +69,9 @@ export default async function HomePage() {
 
   const userName =
     appUser?.display_name || appUser?.username || authUser?.email?.split("@")[0] || "Guest";
+  const avatarUrl =
+    appUser?.avatar_url ||
+    (typeof authUser?.user_metadata.avatar_url === "string" ? authUser.user_metadata.avatar_url : "");
   const recentTrips = trips ?? [];
   const currentTrip = recentTrips[0];
 
@@ -78,7 +83,18 @@ export default async function HomePage() {
           <h1>{userName}</h1>
         </div>
         <Link className={styles.avatarButton} href="/settings" aria-label="Open settings">
-          {getInitial(userName)}
+          {avatarUrl ? (
+            <Image
+              className={styles.avatarButtonImage}
+              src={avatarUrl}
+              alt=""
+              width={46}
+              height={46}
+              unoptimized
+            />
+          ) : (
+            getInitial(userName)
+          )}
         </Link>
       </header>
 
