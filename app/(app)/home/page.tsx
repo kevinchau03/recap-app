@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { createClient } from "@/utils/supabase/server";
+import JoinTripButton from "./JoinTripButton";
 import styles from "../app.module.css";
 
 type AppUser = {
@@ -96,7 +97,7 @@ export default async function HomePage() {
 
       <section className={styles.quickActions} aria-label="Quick actions">
         <Link href="/trips/new">Create trip</Link>
-        <button type="button">Join trip</button>
+        <JoinTripButton />
       </section>
 
       <section className={styles.tripList} aria-label="Recent trips">
