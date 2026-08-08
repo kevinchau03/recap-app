@@ -2,6 +2,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import type { CSSProperties } from "react";
+import TripMemberAvatars, { type TripMemberAvatar } from "@/components/TripMemberAvatars";
 import { createClient } from "@/utils/supabase/server";
 import TripInvitePanel from "./TripInvitePanel";
 import TripPhotoUpload from "./TripPhotoUpload";
@@ -15,6 +17,7 @@ type TripPageProps = {
 
 type Trip = {
   id: string;
+  user_id: string;
   name: string;
   description: string | null;
   location: string | null;
@@ -27,6 +30,8 @@ type Trip = {
 
 type TripMediaRecord = {
   id: string;
+  uploaded_by: string | null;
+  is_cover: boolean | null;
   storage_path: string;
   original_filename: string | null;
   width: number | null;
@@ -42,6 +47,21 @@ type TripMediaRecord = {
 type TripMedia = TripMediaRecord & {
   signedUrl: string;
   isMissingDetails: boolean;
+  sharedBy: string;
+};
+
+type AppUser = {
+  id: string;
+  avatar_url: string | null;
+  display_name: string | null;
+  username: string | null;
+};
+
+type TripMemberRecord = {
+  trip_id: string;
+  user_id: string;
+  role: string | null;
+  joined_at: string | null;
 };
 
 const formatDateRange = (startDate: string | null, endDate: string | null) => {
@@ -61,6 +81,13 @@ const formatDateRange = (startDate: string | null, endDate: string | null) => {
   return [start, end].filter(Boolean).join(" - ");
 };
 
+const getHeroStyle = (coverUrl: string | null): CSSProperties | undefined =>
+  coverUrl
+    ? {
+        backgroundImage: `linear-gradient(180deg, rgba(26, 28, 30, 0.08), rgba(26, 28, 30, 0.72)), url("${coverUrl}")`,
+      }
+    : undefined;
+
 const getTrip = async (id: string) => {
   const supabase = await createClient();
   const {
@@ -73,7 +100,7 @@ const getTrip = async (id: string) => {
 
   const { data } = await supabase
     .from("trips")
-    .select("id, name, description, location, start_date, end_date, cover_label, member_count, photo_count")
+    .select("id, user_id, name, description, location, start_date, end_date, cover_label, member_count, photo_count")
     .eq("id", id)
     .maybeSingle<Trip>();
 
@@ -82,10 +109,13 @@ const getTrip = async (id: string) => {
 
 const getTripMedia = async (tripId: string) => {
   const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
 
   const { data: media } = await supabase
     .from("trip_media")
-    .select("id, storage_path, original_filename, width, height, created_at, captured_at, latitude, longitude, location_name, metadata_status")
+    .select("id, uploaded_by, is_cover, storage_path, original_filename, width, height, created_at, captured_at, latitude, longitude, location_name, metadata_status")
     .eq("trip_id", tripId)
     .eq("media_type", "photo")
     .order("captured_at", { ascending: false, nullsFirst: false })
@@ -95,6 +125,23 @@ const getTripMedia = async (tripId: string) => {
   if (!media?.length) {
     return [];
   }
+
+  const uploaderIds = Array.from(
+    new Set(media.map((item) => item.uploaded_by).filter((id): id is string => Boolean(id))),
+  );
+  const { data: uploaders } = uploaderIds.length
+    ? await supabase
+        .from("users")
+        .select("id, avatar_url, display_name, username")
+        .in("id", uploaderIds)
+        .returns<AppUser[]>()
+    : { data: [] as AppUser[] };
+  const uploaderNames = new Map(
+    (uploaders ?? []).map((uploader) => [
+      uploader.id,
+      uploader.display_name || uploader.username || "Member",
+    ]),
+  );
 
   const mediaWithUrls = await Promise.all(
     media.map(async (item) => {
@@ -106,6 +153,10 @@ const getTripMedia = async (tripId: string) => {
         ? {
             ...item,
             signedUrl: data.signedUrl,
+            sharedBy:
+              item.uploaded_by === user?.id
+                ? "you"
+                : uploaderNames.get(item.uploaded_by ?? "") ?? "a trip member",
             isMissingDetails:
               !item.captured_at ||
               (!item.location_name && (item.latitude === null || item.longitude === null)) ||
@@ -118,6 +169,39 @@ const getTripMedia = async (tripId: string) => {
   );
 
   return mediaWithUrls.filter((item): item is TripMedia => Boolean(item));
+};
+
+const getTripMembers = async (trip: Trip) => {
+  const supabase = await createClient();
+  const { data: tripMembers } = await supabase
+    .from("trip_members")
+    .select("trip_id, user_id, role, joined_at")
+    .eq("trip_id", trip.id)
+    .order("joined_at", { ascending: true })
+    .returns<TripMemberRecord[]>();
+  const memberIds = Array.from(new Set([trip.user_id, ...(tripMembers ?? []).map((member) => member.user_id)]));
+
+  if (!memberIds.length) {
+    return [] as TripMemberAvatar[];
+  }
+
+  const { data: users } = await supabase
+    .from("users")
+    .select("id, avatar_url, display_name, username")
+    .in("id", memberIds)
+    .returns<AppUser[]>();
+  const userById = new Map((users ?? []).map((user) => [user.id, user]));
+
+  return memberIds.map((memberId) => {
+    const user = userById.get(memberId);
+    const name = user?.display_name || user?.username || "Member";
+
+    return {
+      id: memberId,
+      avatarUrl: user?.avatar_url ?? null,
+      name,
+    };
+  });
 };
 
 export async function generateMetadata({ params }: TripPageProps): Promise<Metadata> {
@@ -145,6 +229,8 @@ export default async function TripPage({ params }: TripPageProps) {
   }
 
   const media = await getTripMedia(id);
+  const members = await getTripMembers(trip);
+  const coverPhoto = media.find((photo) => photo.is_cover) ?? media[0] ?? null;
 
   return (
     <>
@@ -156,12 +242,17 @@ export default async function TripPage({ params }: TripPageProps) {
         <Link className={styles.smallAction} href="/trips">Back</Link>
       </header>
 
-      <section className={styles.tripDetailHero} aria-label="Trip summary">
+      <section
+        className={`${styles.tripDetailHero} ${coverPhoto ? styles.tripDetailHeroWithCover : ""}`}
+        aria-label="Trip summary"
+        style={getHeroStyle(coverPhoto?.signedUrl ?? null)}
+      >
         <p>{formatDateRange(trip.start_date, trip.end_date)}</p>
         <h2>{trip.cover_label || trip.location || "Memories"}</h2>
         <span>
           {trip.member_count ?? 1} friends - {trip.photo_count ?? 0} photos
         </span>
+        <TripMemberAvatars members={members} />
       </section>
 
       <section className={styles.tripActionGrid} aria-label="Trip actions">
@@ -185,8 +276,9 @@ export default async function TripPage({ params }: TripPageProps) {
                   src={photo.signedUrl}
                   width={photo.width ?? 400}
                 />
+                <figcaption className={styles.sharedByBadge}>Shared by {photo.sharedBy}</figcaption>
                 {photo.isMissingDetails ? (
-                  <figcaption className={styles.missingDetailsBadge}>Missing details</figcaption>
+                  <span className={styles.missingDetailsBadge}>Missing details</span>
                 ) : null}
               </figure>
             </Link>

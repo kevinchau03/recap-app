@@ -22,6 +22,7 @@ type Trip = {
 type TripMediaRecord = {
   id: string;
   trip_id: string;
+  uploaded_by: string | null;
   storage_path: string;
   original_filename: string | null;
   width: number | null;
@@ -38,6 +39,14 @@ type TripMediaRecord = {
 
 type TripPhoto = TripMediaRecord & {
   signedUrl: string;
+  sharedBy: string;
+};
+
+type AppUser = {
+  id: string;
+  avatar_url: string | null;
+  display_name: string | null;
+  username: string | null;
 };
 
 const getDatetimeLocalValue = (value: string | null) => {
@@ -56,6 +65,9 @@ const getDatetimeLocalValue = (value: string | null) => {
 
 async function getTripPhoto(tripId: string, photoId: string) {
   const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
 
   const { data: trip } = await supabase
     .from("trips")
@@ -69,7 +81,7 @@ async function getTripPhoto(tripId: string, photoId: string) {
 
   const { data: photo } = await supabase
     .from("trip_media")
-    .select("id, trip_id, storage_path, original_filename, width, height, captured_at, latitude, longitude, location_name, timezone, caption, is_cover, metadata_status")
+    .select("id, trip_id, uploaded_by, storage_path, original_filename, width, height, captured_at, latitude, longitude, location_name, timezone, caption, is_cover, metadata_status")
     .eq("id", photoId)
     .eq("trip_id", tripId)
     .eq("media_type", "photo")
@@ -87,11 +99,23 @@ async function getTripPhoto(tripId: string, photoId: string) {
     return null;
   }
 
+  const { data: uploader } = photo.uploaded_by
+    ? await supabase
+        .from("users")
+        .select("id, avatar_url, display_name, username")
+        .eq("id", photo.uploaded_by)
+        .maybeSingle<AppUser>()
+    : { data: null };
+
   return {
     trip,
     photo: {
       ...photo,
       signedUrl: data.signedUrl,
+      sharedBy:
+        photo.uploaded_by === user?.id
+          ? "you"
+          : uploader?.display_name || uploader?.username || "a trip member",
     } satisfies TripPhoto,
   };
 }
@@ -145,6 +169,7 @@ export default async function TripPhotoPage({ params }: PhotoPageProps) {
         </figure>
 
         <form action={updateTripPhotoDetails} className={styles.photoDetailsForm}>
+          <p className={styles.photoSharedBy}>Shared by {photo.sharedBy}</p>
           <input name="tripId" type="hidden" value={trip.id} />
           <input name="photoId" type="hidden" value={photo.id} />
 

@@ -260,6 +260,12 @@
   box-shadow: 0 1px 2px rgba(37, 62, 167, 0.48), 0 0 0 1px #375dfb;
 }
 
+.appHeroWithCover,
+.tripDetailHeroWithCover {
+  background-position: center;
+  background-size: cover;
+}
+
 .appHero p { font-family: var(--font-kirang), cursive; font-size: 1.05rem; font-weight: 400; letter-spacing: -0.16px; opacity: 0.86; }
 .appHero h2 { margin-top: 8px; font-family: var(--font-kirang), cursive; font-size: 2.25rem; font-weight: 400; letter-spacing: -0.32px; line-height: 1.05; }
 .appHero span { margin-top: 8px; color: rgba(255, 255, 255, 0.84); font-size: 0.88rem; line-height: 1.4; }
@@ -273,18 +279,33 @@
 .sectionHeading { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 14px; }
 .sectionHeading h2 { font-family: var(--font-kirang), cursive; font-size: 1.7rem; font-weight: 400; letter-spacing: -0.24px; }
 .sectionHeading a { color: #4d81e7; font-family: var(--font-kirang), cursive; font-size: 1.05rem; font-weight: 400; }
+.tripGroup { display: grid; gap: 2px; }
+.tripGroup + .tripGroup { margin-top: 18px; }
+.tripGroup h3 { margin: 0 0 4px; color: #6c7278; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0; }
 .tripRow { display: grid; grid-template-columns: 64px 1fr; align-items: center; gap: 14px; padding: 12px 0; }
-.tripThumbnail { width: 64px; height: 64px; display: grid; place-items: center; border: 1px solid #edf1f3; border-radius: 16px; background: #f8fafc; box-shadow: 0 1px 2px rgba(228, 229, 231, 0.24); color: #1a1c1e; font-family: var(--font-kirang), cursive; font-size: 1rem; font-weight: 400; }
-.tripRow h3 { font-size: 0.98rem; font-weight: 650; }
+.tripThumbnail { width: 64px; height: 64px; overflow: hidden; display: grid; place-items: center; border: 1px solid #edf1f3; border-radius: 16px; background: #f8fafc; box-shadow: 0 1px 2px rgba(228, 229, 231, 0.24); color: #1a1c1e; font-family: var(--font-kirang), cursive; font-size: 1rem; font-weight: 400; }
+.tripThumbnailWithCover img { width: 100%; height: 100%; display: block; object-fit: cover; }
+.tripRow h3,
+.tripRow h4 { margin: 0; font-size: 0.98rem; font-weight: 650; }
 .tripRow p { margin-top: 5px; color: #6c7278; font-size: 0.84rem; }
+.memberStack { display: flex; align-items: center; min-height: 28px; margin-top: 9px; padding-left: 2px; }
+.memberAvatar,
+.memberOverflow { width: 28px; min-width: 28px; max-width: 28px; height: 28px; min-height: 28px; max-height: 28px; box-sizing: border-box; flex: 0 0 28px; overflow: hidden; display: grid; place-items: center; margin: 0 0 0 -4px; padding: 0; border: 2px solid #fff; border-radius: 999px; background: #edf1f3; color: #1a1c1e; box-shadow: 0 1px 2px rgba(26, 28, 30, 0.12); font-size: 0.72rem; font-weight: 800; line-height: 1; text-align: center; }
+.memberAvatar:first-child { margin-left: 0; }
+.memberAvatarImage { width: 100%; height: 100%; display: block; border-radius: inherit; object-fit: cover; object-position: center; }
+.memberOverflow { background: #1d61e7; color: #fff; }
 
-.fullTripList { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 310px), 1fr)); gap: 16px; margin-top: 26px; }
+.tripSections { display: grid; gap: 28px; margin-top: 26px; }
+.tripSection { display: grid; gap: 0; }
+.fullTripList { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 310px), 1fr)); gap: 16px; }
 .tripCard { overflow: hidden; display: grid; grid-template-columns: 104px 1fr; min-height: 124px; border: 1px solid #edf1f3; border-radius: 18px; background: #fff; box-shadow: 0 1px 2px rgba(228, 229, 231, 0.24); }
 .tripCardArt { display: grid; place-items: center; border-right: 1px solid #edf1f3; background: #f8fafc; color: #1a1c1e; font-family: var(--font-kirang), cursive; font-size: 1.25rem; font-weight: 400; }
+.tripCardArtWithCover { background-position: center; background-size: cover; color: #fff; text-align: center; }
+.tripCardArtWithCover span { padding: 6px 8px; text-shadow: 0 1px 8px rgba(26, 28, 30, 0.46); }
 .tripCardCopy { display: flex; flex-direction: column; justify-content: center; padding: 16px; }
 .tripCardCopy p { color: #6c7278; font-size: 0.72rem; font-weight: 600; }
 .tripCardCopy h2 { margin-top: 7px; font-family: var(--font-kirang), cursive; font-size: 1.7rem; font-weight: 400; line-height: 1.05; }
-.tripCardCopy span { margin-top: 8px; color: #6c7278; font-size: 0.78rem; }
+.tripCardCopy > span { margin-top: 8px; color: #6c7278; font-size: 0.78rem; }
 
 .formCard { display: grid; gap: 18px; margin-top: 28px; padding: 0; background: #fff; }
 .formCard label { display: grid; gap: 6px; color: #6c7278; font-family: var(--font-kirang), cursive; font-size: 1.05rem; font-weight: 400; letter-spacing: -0.2px; }
@@ -305,24 +326,30 @@
 .tripDetailHero p { font-family: var(--font-kirang), cursive; font-size: 1.05rem; font-weight: 400; letter-spacing: -0.16px; opacity: 0.86; }
 .tripDetailHero h2 { margin-top: 8px; font-family: var(--font-kirang), cursive; font-size: 2.25rem; font-weight: 400; line-height: 1.05; letter-spacing: -0.32px; }
 .tripDetailHero span { margin-top: 8px; color: rgba(255, 255, 255, 0.84); font-size: 0.9rem; }
+.tripDetailHero .memberStack { min-height: 28px; margin-top: 12px; }
+.tripDetailHero .memberAvatar,
+.tripDetailHero .memberOverflow { margin-top: 0; color: #1a1c1e; font-size: 0.72rem; line-height: 1; }
+.tripDetailHero .memberOverflow { color: #fff; }
 .tripActionGrid { display: grid; grid-template-columns: repeat(2, minmax(0, 220px)); gap: 12px; margin-top: 18px; }
 .tripActionGrid button,
 .uploadAction { min-height: 58px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 0 10px; border: 1px solid #edf1f3; border-radius: 10px; background: #fff; color: #1a1c1e; box-shadow: 0 1px 2px rgba(228, 229, 231, 0.24); font-family: var(--font-kirang), cursive; font-size: 1rem; font-weight: 400; text-align: center; }
 .uploadActions { display: contents; }
 .uploadAction { position: relative; overflow: hidden; cursor: pointer; }
-.uploadAction input { position: absolute; inset: 0; opacity: 0; pointer-events: none; }
+.uploadAction input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
 .uploadActionPrimary { border-color: #fff; background: #1d61e7; color: #fff; box-shadow: 0 1px 2px rgba(37, 62, 167, 0.48), 0 0 0 1px #375dfb; }
 .uploadMessage { grid-column: 1 / -1; margin: 0; color: #6c7278; font-size: 0.82rem; }
 .photoGrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 12px; margin-top: 22px; }
 .photoTileLink { min-width: 0; color: inherit; }
 .photoTile { aspect-ratio: 1; overflow: hidden; position: relative; margin: 0; border-radius: 16px; background: #f8fafc; }
 .photoTile img { width: 100%; height: 100%; display: block; object-fit: cover; }
-.missingDetailsBadge { position: absolute; right: 8px; bottom: 8px; left: 8px; min-height: 28px; display: grid; place-items: center; padding: 5px 8px; border-radius: 8px; background: rgba(26, 28, 30, 0.78); color: #fff; font-size: 0.72rem; font-weight: 700; text-align: center; }
+.sharedByBadge { position: absolute; right: 8px; bottom: 8px; left: 8px; min-height: 28px; display: grid; place-items: center; padding: 5px 8px; border-radius: 8px; background: rgba(26, 28, 30, 0.78); color: #fff; font-size: 0.72rem; font-weight: 700; text-align: center; }
+.missingDetailsBadge { position: absolute; top: 8px; right: 8px; min-height: 28px; display: grid; place-items: center; padding: 5px 8px; border-radius: 8px; background: rgba(26, 28, 30, 0.78); color: #fff; font-size: 0.72rem; font-weight: 700; text-align: center; }
 .photoDetailShell { display: grid; grid-template-columns: minmax(0, 1fr) minmax(280px, 420px); gap: 22px; align-items: start; margin-top: 24px; }
 .photoDetailPreview { overflow: hidden; position: relative; margin: 0; border-radius: 18px; background: #f8fafc; }
 .photoDetailPreview img { width: 100%; height: auto; max-height: 68svh; display: block; object-fit: contain; background: #f8fafc; }
 .missingDetailsNotice { position: absolute; right: 12px; bottom: 12px; padding: 7px 10px; border-radius: 8px; background: rgba(26, 28, 30, 0.78); color: #fff; font-size: 0.78rem; font-weight: 700; }
 .photoDetailsForm { display: grid; gap: 16px; padding: 18px; border: 1px solid #edf1f3; border-radius: 18px; background: #fff; box-shadow: 0 1px 2px rgba(228, 229, 231, 0.24); }
+.photoSharedBy { margin: 0; padding-bottom: 2px; color: #6c7278; font-size: 0.84rem; font-weight: 700; }
 .photoDetailsForm label { display: grid; gap: 7px; color: #6c7278; font-family: var(--font-kirang), cursive; font-size: 1.05rem; font-weight: 400; letter-spacing: -0.2px; }
 .photoDetailsForm input,
 .photoDetailsForm textarea { width: 100%; min-width: 0; padding: 0 14px; border: 1px solid #edf1f3; border-radius: 10px; outline: none; background: #fff; color: #1a1c1e; box-shadow: 0 1px 2px rgba(228, 229, 231, 0.24); font-family: var(--font-geist-sans), Arial, sans-serif; font-size: 0.95rem; }

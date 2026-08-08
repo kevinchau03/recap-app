@@ -7,13 +7,25 @@ import { createClient } from "@/utils/supabase/client";
 import styles from "../../app.module.css";
 
 const BUCKET = "trip-media";
-const MAX_FILE_SIZE = 10 * 1024 * 1024;
+const MAX_FILE_SIZE = 25 * 1024 * 1024;
 const IMAGE_TYPES = new Set([
   "image/jpeg",
+  "image/jpg",
+  "image/pjpeg",
   "image/png",
   "image/webp",
   "image/heic",
   "image/heif",
+]);
+const EXTENSION_TYPES = new Map([
+  ["jpg", "image/jpeg"],
+  ["jpeg", "image/jpeg"],
+  ["jfif", "image/jpeg"],
+  ["pjpeg", "image/jpeg"],
+  ["png", "image/png"],
+  ["webp", "image/webp"],
+  ["heic", "image/heic"],
+  ["heif", "image/heif"],
 ]);
 
 type TripPhotoUploadProps = {
@@ -27,6 +39,20 @@ const sanitizeFileName = (fileName: string) =>
     .replace(/-+/g, "-")
     .replace(/^-|-$/g, "")
     .slice(0, 80) || "photo";
+
+const getFileExtension = (fileName: string) => {
+  const [, extension = ""] = fileName.toLowerCase().match(/\.([a-z0-9]+)$/) ?? [];
+
+  return extension;
+};
+
+const getImageType = (file: File) => {
+  if (IMAGE_TYPES.has(file.type)) {
+    return file.type === "image/jpg" || file.type === "image/pjpeg" ? "image/jpeg" : file.type;
+  }
+
+  return EXTENSION_TYPES.get(getFileExtension(file.name)) ?? null;
+};
 
 async function readImageSize(file: File) {
   const url = URL.createObjectURL(file);
@@ -82,12 +108,14 @@ export default function TripPhotoUpload({ tripId }: TripPhotoUploadProps) {
 
     try {
       for (const file of Array.from(files)) {
-        if (!IMAGE_TYPES.has(file.type)) {
+        const imageType = getImageType(file);
+
+        if (!imageType) {
           throw new Error("Upload JPEG, PNG, WebP, HEIC, or HEIF photos.");
         }
 
         if (file.size > MAX_FILE_SIZE) {
-          throw new Error("Photos must be 10 MB or smaller.");
+          throw new Error("Photos must be 25 MB or smaller.");
         }
 
         const mediaId = crypto.randomUUID();
@@ -98,7 +126,7 @@ export default function TripPhotoUpload({ tripId }: TripPhotoUploadProps) {
           .from(BUCKET)
           .upload(storagePath, file, {
             cacheControl: "31536000",
-            contentType: file.type,
+            contentType: imageType,
             upsert: false,
           });
 
@@ -113,7 +141,7 @@ export default function TripPhotoUpload({ tripId }: TripPhotoUploadProps) {
           storage_bucket: BUCKET,
           storage_path: storagePath,
           media_type: "photo",
-          mime_type: file.type,
+          mime_type: imageType,
           size_bytes: file.size,
           width: dimensions.width,
           height: dimensions.height,
@@ -150,8 +178,8 @@ export default function TripPhotoUpload({ tripId }: TripPhotoUploadProps) {
             multiple
             onChange={(event) => uploadFiles(event.currentTarget.files)}
             ref={fileInputRef}
-            type="file"
-          />
+          type="file"
+        />
         </label>
 
         <label className={styles.uploadAction}>
